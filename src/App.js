@@ -6,12 +6,7 @@ import Todo from './components/Todo';
 class App extends Component {
   state = {
     todo: '',
-    todoList: [
-      { id: '1', title: 'Push your code to github', completed: false },
-      { id: '2', title: 'Email to your manager', completed: false },
-      { id: '3', title: 'Kill to your manager', completed: false },
-      { id: '4', title: 'Buy to your manager', completed: false },
-    ],
+    todoList: [],
   };
   handleTodo = (value) => {
     this.setState({ todoTask: value });
