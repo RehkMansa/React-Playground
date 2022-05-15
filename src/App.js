@@ -1,25 +1,66 @@
-import logo from './logo.svg';
+import React, { Component } from 'react';
 import './App.css';
+import CreateTodo from './components/CreateTodo';
+import Todo from './components/Todo';
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+class App extends Component {
+  state = {
+    todo: '',
+    todoList: [
+      { id: '1', title: 'Push your code to github', completed: false },
+      { id: '2', title: 'Email to your manager', completed: false },
+      { id: '3', title: 'Kill to your manager', completed: false },
+      { id: '4', title: 'Buy to your manager', completed: false },
+    ],
+  };
+  handleTodo = (value) => {
+    this.setState({ todoTask: value });
+  };
+  addTodoItem = (task) => {
+    let lastId = this.state.todoList.length;
+    let taskTitle = task;
+    task = {
+      id: lastId + 1,
+      title: task,
+      completed: false,
+    };
+    this.setState({ todoList: [...this.state.todoList, task] });
+  };
+  completeTask = (todo) => {
+    // todo.status = true;
+    let filteredTodo = this.state.todoList.map((task) => {
+      if (task.id == todo.id) {
+        task.completed = true;
+      }
+
+      return task;
+    });
+    this.setState({ todoList: filteredTodo });
+  };
+  deleteTask = (todo) => {
+    let filterTodo = this.state.todoList.filter((task) => {
+      if (task.id != todo.id) {
+        return task;
+      }
+    });
+    this.setState({ todoList: filterTodo });
+  };
+  render() {
+    return (
+      <div className="app-body">
+        <CreateTodo
+          handleTextChange={this.handleTodo}
+          todoItem={this.state.todoTask}
+          onSubmit={this.addTodoItem}
+        />
+        <Todo
+          todoList={this.state.todoList}
+          completeTodo={this.completeTask}
+          deleteTodo={this.deleteTask}
+        />
+      </div>
+    );
+  }
 }
 
 export default App;
