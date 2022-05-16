@@ -1,12 +1,15 @@
 import React from 'react';
 import styles from './Expenses.module.css';
-const Expenses = () => {
-  const expense = ({ name, amount }) => (
-    <div className={styles.expenses__single}>
+import { AiOutlineCloseCircle } from 'react-icons/ai';
+import { IconContext } from 'react-icons';
+const Expenses = ({ expenseList }) => {
+  const expense = ({ name, amount, id }) => (
+    <div key={id} className={styles.expenses__single}>
       <p>{name}</p>
-      <p>
+      <div className={styles.expenseSingle__left}>
         <span>{amount}</span>
-      </p>
+        <AiOutlineCloseCircle className={styles.expenseIcon} />
+      </div>
     </div>
   );
   return (
@@ -18,11 +21,13 @@ const Expenses = () => {
         </form>
       </div>
       <div className={styles.expenses__container}>
-        {expense({ name: 'Hello world', amount: 3 })}
-        {expense({ name: 'Child fees', amount: 30 })}
-        {expense({ name: 'Hotel', amount: 99 })}
-        {expense({ name: 'Vacation world', amount: 60 })}
-        {expense({ name: 'Thrift', amount: 20 })}
+        {expenseList.map((item) => {
+          return expense({
+            name: item.name,
+            id: item.id,
+            amount: `$${item.amount}`,
+          });
+        })}
       </div>
     </div>
   );

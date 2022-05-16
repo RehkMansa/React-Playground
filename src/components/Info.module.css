@@ -1,0 +1,28 @@
+.information__form {
+  display: flex;
+  width: 620px;
+  justify-content: center;
+  padding-top: 10px;
+  padding-bottom: 30px;
+}
+.information {
+  padding-right: 15px;
+  text-align: center;
+}
+.information__form input {
+  flex: 0.8;
+  border-top-left-radius: 20px;
+  border: 1px solid;
+  outline: none;
+  border-bottom-left-radius: 20px;
+}
+.information__form button {
+  padding: 12px 20px;
+  flex: 0.2;
+  position: relative;
+  border-top-left-radius: 0px;
+  border-bottom-left-radius: 0px;
+  border-top-right-radius: 20px;
+  border-bottom-right-radius: 20px;
+  margin-left: -20px;
+}
